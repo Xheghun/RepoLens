@@ -1,4 +1,4 @@
-package com.xheghun.repolens.ui.theme
+package com.xheghun.repolens.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

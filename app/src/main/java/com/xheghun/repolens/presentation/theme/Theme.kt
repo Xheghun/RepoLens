@@ -1,6 +1,5 @@
-package com.xheghun.repolens.ui.theme
+package com.xheghun.repolens.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
