@@ -1,21 +1,14 @@
 package com.xheghun.repolens.presentation.search
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.xheghun.repolens.presentation.widget.PageTitle
 
 @Composable
-fun SearchView() {
+fun SearchView(navController: NavHostController) {
     Column {
-        androidx.compose.material3.Text(
-            text = "Repositories",
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 25.dp)
-        )
+
+        PageTitle(title = "Repositories")
     }
 }

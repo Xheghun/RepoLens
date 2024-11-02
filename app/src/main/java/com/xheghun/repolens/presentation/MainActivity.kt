@@ -43,8 +43,8 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val screens = listOf(
                 TopLevelRoute("Home", Routes.Home, R.drawable.home, R.drawable.home_active),
-                TopLevelRoute("Repositories", Routes.Search, R.drawable.search, R.drawable.search_active),
-                TopLevelRoute("Users", Routes.User, R.drawable.user, R.drawable.user_active),
+                TopLevelRoute("Repositories", Routes.Repositories, R.drawable.search, R.drawable.search_active),
+                TopLevelRoute("Users", Routes.Users, R.drawable.user, R.drawable.user_active),
             )
             RepoLensTheme {
                 Scaffold(
@@ -100,9 +100,9 @@ class MainActivity : ComponentActivity() {
                         startDestination = Routes.Home.name,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable(Routes.Home.name) { HomeView() }
-                        composable(Routes.Search.name) { SearchView() }
-                        composable(Routes.User.name) { UserView() }
+                        composable(Routes.Home.name) { HomeView(navController) }
+                        composable(Routes.Repositories.name) { SearchView(navController) }
+                        composable(Routes.Users.name) { UserView(navController) }
                     }
                 }
 
