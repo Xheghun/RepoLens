@@ -7,6 +7,6 @@ import androidx.compose.runtime.Composable
 @Composable
 fun HomeView() {
     Column {
-        Text(text = "SearchView")
+        Text(text = "Home View")
     }
 }

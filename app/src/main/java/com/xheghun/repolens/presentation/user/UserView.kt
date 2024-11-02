@@ -7,6 +7,6 @@ import androidx.compose.runtime.Composable
 @Composable
 fun UserView() {
     Column {
-        Text(text = "SearchView")
+        Text(text = "User View")
     }
 }

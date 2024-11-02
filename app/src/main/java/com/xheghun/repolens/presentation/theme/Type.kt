@@ -23,9 +23,9 @@ val Typography = Typography(
     ),
     labelSmall = TextStyle(
         fontFamily = ManRope,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
-    )
+    ),
 )

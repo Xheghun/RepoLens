@@ -8,30 +8,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.xheghun.repolens.R
 import com.xheghun.repolens.presentation.home.HomeView
 import com.xheghun.repolens.presentation.search.SearchView
 import com.xheghun.repolens.presentation.theme.RepoLensTheme
 import com.xheghun.repolens.presentation.user.UserView
 
-data class TopLevelRoute<T : Any>(val name: String, val route: T, val icon: ImageVector)
+data class TopLevelRoute<T : Any>(
+    val name: String,
+    val route: T,
+    val icon: Int,
+    val selectedIcon: Int
+)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +42,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             val screens = listOf(
-                TopLevelRoute("", Routes.Home, Icons.Default.Info),
-                TopLevelRoute("", Routes.Search, Icons.Default.Search),
-                TopLevelRoute("", Routes.User, Icons.Default.AccountCircle),
+                TopLevelRoute("Home", Routes.Home, R.drawable.home, R.drawable.home_active),
+                TopLevelRoute("Repositories", Routes.Search, R.drawable.search, R.drawable.search_active),
+                TopLevelRoute("Users", Routes.User, R.drawable.user, R.drawable.user_active),
             )
             RepoLensTheme {
                 Scaffold(
@@ -54,11 +56,12 @@ class MainActivity : ComponentActivity() {
                             backgroundColor = Color.White,
                         ) {
                             screens.forEach { screen ->
+                                val isSelected = currentDestination?.hierarchy?.any {
+                                    it.hasRoute(screen.route.name, null)
+                                } == true
                                 BottomNavigationItem(
-                                    modifier = Modifier.padding(12.dp),
-                                    selected = currentDestination?.hierarchy?.any {
-                                        it.hasRoute(screen.route::class)
-                                    } == true,
+                                    modifier = Modifier.padding(10.dp),
+                                    selected = isSelected,
                                     onClick = {
                                         navController.navigate(screen.route.name) {
                                             popUpTo(navController.graph.findStartDestination().id) {
@@ -68,9 +71,24 @@ class MainActivity : ComponentActivity() {
                                             restoreState = true
                                         }
                                     },
-                                    icon = { Icon(screen.icon, contentDescription = "nav icon") },
+                                    icon = {
+                                        if (!isSelected)
+                                            Icon(
+                                                painter = painterResource(screen.icon),
+                                                contentDescription = "${screen.name} nav icon"
+                                            )
+                                        else
+                                            Icon(
+                                                painter = painterResource(id = screen.selectedIcon),
+                                                contentDescription = "${screen.name} active nav icon"
+                                            )
+                                    },
                                     label = {
-                                        Text(screen.name)
+                                        Text(
+                                            screen.name,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            modifier = Modifier.padding(vertical = 6.dp)
+                                        )
                                     })
                             }
                         }
