@@ -97,7 +97,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = Routes.Repositories.name,
+                        startDestination = Routes.Users.name,
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(Routes.Home.name) { HomeView(navController) }
