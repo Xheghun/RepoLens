@@ -42,5 +42,13 @@ val Typography = Typography(
         fontSize = 12.sp,
         lineHeight = 14.sp,
         letterSpacing = 0.5.sp
+    ),
+
+    displaySmall = TextStyle(
+        fontFamily = ManRope,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.5.sp
     )
 )
