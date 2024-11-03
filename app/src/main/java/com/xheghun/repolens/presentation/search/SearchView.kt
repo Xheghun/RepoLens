@@ -1,8 +1,10 @@
 package com.xheghun.repolens.presentation.search
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,12 +27,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.xheghun.repolens.R
 import com.xheghun.repolens.presentation.theme.Black
+import com.xheghun.repolens.presentation.theme.EmptyState
 import com.xheghun.repolens.presentation.theme.Grey
 import com.xheghun.repolens.presentation.widget.PageTitle
+import com.xheghun.repolens.presentation.widget.SearchTextField
 
 @Composable
 fun SearchView(navController: NavHostController) {
@@ -42,7 +47,10 @@ fun SearchView(navController: NavHostController) {
             .fillMaxWidth()
             .padding(horizontal = 12.dp)
     ) {
+        //HEADER
         PageTitle(title = "Repositories")
+
+        //SEARCH BAR
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier =
@@ -60,20 +68,11 @@ fun SearchView(navController: NavHostController) {
                     .size(14.dp)
             )
             Box(Modifier.width(6.dp))
-            BasicTextField(
+            SearchTextField(
+                hintText = "Search for repositories...",
                 value = value,
-                onValueChange = { newValue -> value = newValue},
-                decorationBox = { innerTextField ->
-                    if (value.isEmpty()) {
-                        Text(
-                            text = "Search for repositories...",
-                            color = Grey,
-                            style = MaterialTheme.typography.bodySmall,
-                        )
-                    } else {
-                        innerTextField()
-                    }
-
+                onValueChange = { newValue ->
+                    value = newValue
                 },
                 modifier = Modifier.weight(1f)
             )
@@ -89,5 +88,26 @@ fun SearchView(navController: NavHostController) {
                     .padding(horizontal = 25.dp, vertical = 10.dp)
             )
         }
+
+        //EMPTY STATE
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.search_prompt),
+                contentDescription = "empty search state"
+            )
+            Text(
+                text = "Search Github repositories, issues and pull request!",
+                color = EmptyState,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(vertical = 10.dp)
+            )
+        }
+
     }
 }
