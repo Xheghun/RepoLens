@@ -21,7 +21,10 @@ import com.xheghun.repolens.presentation.widget.PageTitle
 @Composable
 fun HomeView(navController: NavHostController) {
     Column(Modifier.padding(horizontal = 12.dp)) {
+        //HEADER
         PageTitle(title = "Home")
+
+        //NAV TILE
         Row {
             NavTile(
                 title = "Users",
