@@ -1,6 +1,5 @@
 package com.xheghun.repolens.presentation.widget
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -18,7 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.xheghun.repolens.presentation.theme.Grey
+import com.xheghun.repolens.presentation.theme.GreyLight
 
 @Composable
 fun NavTile(
@@ -36,7 +35,7 @@ fun NavTile(
             .height(140.dp)
             .clip(RoundedCornerShape(4.dp))
             .clickable { onTap() }
-            .border(0.5.dp, Grey, shape = RoundedCornerShape(4.dp))
+            .border(0.5.dp, GreyLight, shape = RoundedCornerShape(4.dp))
             .background(backgroundColor)
             .padding(10.dp)
     ) {
