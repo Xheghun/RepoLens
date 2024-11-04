@@ -9,6 +9,9 @@ lifecycleRuntimeKtx = "2.8.5"
 activityCompose = "1.9.2"
 composeBom = "2024.04.01"
 navVersion = '2.8.3'
+koinVersion = '3.6.0-wasm-alpha2'
+squareupVersion = "2.6.2"
+okhttpVersion = "4.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,7 +28,13 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navVersion"}
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navVersion" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinVersion" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit:2.6.2", version.ref = "squareupVersion" }
+squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
+squareup-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "squareupVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

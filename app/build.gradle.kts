@@ -1,7 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
+
+val credentialsPropFile = rootProject.file("credentials.properties")
+val credentials = Properties().apply {
+    load(credentialsPropFile.inputStream())
+}
+
+val githubAccessToken = credentials["githubAccessToken"] as String
 
 android {
     namespace = "com.xheghun.repolens"
@@ -18,6 +27,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", "GITHUB_ACCESS_TOKEN", githubAccessToken)
     }
 
     buildTypes {
@@ -62,7 +72,17 @@ dependencies {
     implementation(libs.compose.navigation)
 
     implementation("androidx.compose.material:material:1.7.5")
-    
+
+    //DI
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.android)
+
+    //NETWORK
+    implementation(libs.squareup.retrofit)
+    implementation(libs.squareup.okhttp)
+    implementation(libs.squareup.gson)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
