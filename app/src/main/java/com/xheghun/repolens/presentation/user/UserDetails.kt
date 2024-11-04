@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -30,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.xheghun.repolens.R
 import com.xheghun.repolens.presentation.theme.Black
-import com.xheghun.repolens.presentation.theme.EmptyState
-import com.xheghun.repolens.presentation.theme.Grey
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.IconColor
 import com.xheghun.repolens.presentation.widget.RepoItem
@@ -154,7 +151,7 @@ fun UserDetails(navController: NavController) {
         if (false) {
             LazyColumn(Modifier.weight(1f)) {
                 items(12) {
-                    RepoItem()
+                    //RepoItem()
                 }
             }
         }

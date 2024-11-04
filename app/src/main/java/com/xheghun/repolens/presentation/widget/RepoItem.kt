@@ -1,5 +1,6 @@
 package com.xheghun.repolens.presentation.widget
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,7 +25,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
+import coil3.compose.rememberAsyncImagePainter
 import com.xheghun.repolens.R
+import com.xheghun.repolens.data.models.Item
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.theme.DeepPurple
 import com.xheghun.repolens.presentation.theme.GreyLight
@@ -34,9 +38,7 @@ import com.xheghun.repolens.presentation.theme.TealTransparent
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun RepoItem() {
-    val tags = listOf("Design-System", "Component-misc", "Status-New")
-
+fun RepoItem(repo: Item) {
     Surface(
         shadowElevation = 8.dp,
         modifier = Modifier
@@ -50,8 +52,10 @@ fun RepoItem() {
 
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(id = R.drawable.repo_img),
+                AsyncImage(
+                    error = painterResource(R.drawable.repo_img),
+                    placeholder = painterResource(R.drawable.repo_img),
+                    model = "${repo.owner?.avatarURL}",
                     contentDescription = "repo-image",
                     modifier = Modifier
                         .size(20.dp)
@@ -62,41 +66,47 @@ fun RepoItem() {
 
                 Row(Modifier.weight(1f)) {
                     Text(
-                        text = "Docker-lib/",
+                        text = "${repo.owner?.login}/",
                         color = DeepPurple,
                         style = MaterialTheme.typography.bodySmall
                     )
-                    Text(
-                        text = "PythonData",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp)
-                    )
+                    repo.name?.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp)
+                        )
+                    }
                 }
 
-                TextDrawable(text = "10") {
+                TextDrawable(text = "${repo.stargazersCount}") {
                     Image(
                         painter = painterResource(id = R.drawable.star),
                         contentDescription = "github star"
                     )
                 }
                 Box(Modifier.width(10.dp))
-                TextDrawable(text = "10") {
-                    Box(
-                        Modifier
-                            .size(12.dp)
-                            .clip(CircleShape)
-                            .background(Lime)
-                    )
+                repo.language?.let {
+                    TextDrawable(text = it) {
+                        Box(
+                            Modifier
+                                .size(12.dp)
+                                .clip(CircleShape)
+                                .background(Lime)
+                        )
+                    }
                 }
             }
 
-            Text(
-                "These are random words that will be replaced in due time. Config files for my github profile",
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
+            repo.description?.let {
+                Text(
+                    it,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
 
             FlowRow {
-                tags.forEach {
+                repo.topics?.forEach {
                     Text(
                         it,
                         color = Teal,

@@ -36,7 +36,7 @@ fun UserView(navController: NavHostController) {
             SearchBar(
                 hint = "Search for users...",
                 value = model.searchValue.collectAsStateWithLifecycle().value,
-                onValueChange = { newValue -> model.updateSearch(newValue) },
+                onValueChange = { newValue -> model.updateSearchQuery(newValue) },
                 onSearchPressed = {}
             )
 
