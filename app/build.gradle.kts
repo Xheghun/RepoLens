@@ -48,6 +48,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -82,6 +83,8 @@ dependencies {
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.okhttp)
     implementation(libs.squareup.gson)
+    implementation(libs.squareup.gson)
+    implementation(libs.squareup.logging.interceptor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

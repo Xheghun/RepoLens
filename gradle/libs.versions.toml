@@ -32,9 +32,10 @@ compose-navigation = { group = "androidx.navigation", name = "navigation-compose
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinVersion" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
-squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit:2.6.2", version.ref = "squareupVersion" }
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "squareupVersion" }
 squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 squareup-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "squareupVersion" }
+squareup-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
