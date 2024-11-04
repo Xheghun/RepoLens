@@ -44,11 +44,22 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     ),
 
+    displayMedium = TextStyle(
+        fontFamily = ManRope,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.5.sp
+    ),
+
     displaySmall = TextStyle(
         fontFamily = ManRope,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        lineHeight = 14.sp,
-        letterSpacing = 0.5.sp
+        fontSize = 12.sp
+    ),
+    titleSmall = TextStyle(
+        fontFamily = ManRope,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 12.sp
     )
 )

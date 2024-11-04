@@ -20,15 +20,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xheghun.repolens.R
+import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.theme.DeepPurple
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.Lime
-import com.xheghun.repolens.presentation.theme.ManRope
 import com.xheghun.repolens.presentation.theme.Teal
 import com.xheghun.repolens.presentation.theme.TealTransparent
 
@@ -115,10 +115,10 @@ fun RepoItem() {
 
 
 @Composable
-fun TextDrawable(text: String, drawableStart: @Composable () -> Unit) {
+fun TextDrawable(text: String, textColor: Color = Black, drawableStart: @Composable () -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         drawableStart()
         Box(Modifier.width(4.dp))
-        Text(text = text, style = TextStyle(fontSize = 12.sp, fontFamily = ManRope))
+        Text(text = text, color = textColor, style = MaterialTheme.typography.displaySmall)
     }
 }

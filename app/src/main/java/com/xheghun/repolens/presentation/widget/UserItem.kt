@@ -3,6 +3,7 @@ package com.xheghun.repolens.presentation.widget
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -26,13 +27,14 @@ import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.Teal
 
 @Composable
-fun UserItem() {
+fun UserItem(onTap: () -> Unit) {
     Surface(
         shadowElevation = 8.dp,
         modifier = Modifier
             .padding(vertical = 8.dp)
             .border(0.5.dp, GreyLight, RoundedCornerShape(4.dp))
             .clip(RoundedCornerShape(4.dp))
+            .clickable { onTap.invoke() }
     ) {
         Row( Modifier
             .padding(8.dp)) {

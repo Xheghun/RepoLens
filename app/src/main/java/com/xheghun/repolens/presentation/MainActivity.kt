@@ -26,6 +26,7 @@ import com.xheghun.repolens.R
 import com.xheghun.repolens.presentation.home.HomeView
 import com.xheghun.repolens.presentation.search.SearchView
 import com.xheghun.repolens.presentation.theme.RepoLensTheme
+import com.xheghun.repolens.presentation.user.UserDetails
 import com.xheghun.repolens.presentation.user.UserView
 
 data class TopLevelRoute<T : Any>(
@@ -97,12 +98,13 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = Routes.Users.name,
+                        startDestination = Routes.UserDetails.name,
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(Routes.Home.name) { HomeView(navController) }
                         composable(Routes.Repositories.name) { SearchView(navController) }
                         composable(Routes.Users.name) { UserView(navController) }
+                        composable(Routes.UserDetails.name) { UserDetails(navController) }
                     }
                 }
 
