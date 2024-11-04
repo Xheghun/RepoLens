@@ -100,12 +100,13 @@ fun RepoItem() {
                     Text(
                         it,
                         color = Teal,
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
                         modifier = Modifier
                             .padding(4.dp)
                             .clip(RoundedCornerShape(6.dp))
                             .background(TealTransparent)
-                            .padding(vertical = 6.dp, horizontal = 10.dp)
+                            .padding(vertical = 4.dp)
+                            .padding(end = 8.dp)
                     )
                 }
             }

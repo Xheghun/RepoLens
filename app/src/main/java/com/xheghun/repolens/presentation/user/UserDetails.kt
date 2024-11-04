@@ -3,6 +3,7 @@ package com.xheghun.repolens.presentation.user
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -21,18 +23,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.xheghun.repolens.R
 import com.xheghun.repolens.presentation.theme.Black
+import com.xheghun.repolens.presentation.theme.EmptyState
 import com.xheghun.repolens.presentation.theme.Grey
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.IconColor
+import com.xheghun.repolens.presentation.widget.RepoItem
 import com.xheghun.repolens.presentation.widget.TextDrawable
 
 @Composable
 fun UserDetails(navController: NavController) {
+    val uriHandler = LocalUriHandler.current
+
     Column(Modifier.padding(12.dp)) {
 
         //NAVIGATION
@@ -86,11 +94,13 @@ fun UserDetails(navController: NavController) {
 
                 Box(Modifier.width(6.dp))
 
-                TextDrawable(text = "https;//www.paige.com") {
-                    Image(
-                        painter = painterResource(id = R.drawable.link),
-                        contentDescription = "website icon"
-                    )
+                Box(Modifier.clickable { uriHandler.openUri("https://www.paige.com") }) {
+                    TextDrawable(text = "https://www.paige.com") {
+                        Image(
+                            painter = painterResource(id = R.drawable.link),
+                            contentDescription = "website icon"
+                        )
+                    }
                 }
             }
 
@@ -141,5 +151,34 @@ fun UserDetails(navController: NavController) {
         }
 
         //REPO LIST
+        if (false) {
+            LazyColumn(Modifier.weight(1f)) {
+                items(12) {
+                    RepoItem()
+                }
+            }
+        }
+
+        //EMPTY STATE
+        if (true) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.empty_user_repo),
+                    contentDescription = "empty search state"
+                )
+                androidx.compose.material3.Text(
+                    text = "This user  doesn’t have repositories yet, come back later :-)",
+                    color = Black,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(vertical = 10.dp)
+                )
+            }
+        }
     }
 }

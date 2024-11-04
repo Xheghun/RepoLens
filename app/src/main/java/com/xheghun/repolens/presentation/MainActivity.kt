@@ -87,8 +87,8 @@ class MainActivity : ComponentActivity() {
                                     label = {
                                         Text(
                                             screen.name,
-                                            style = MaterialTheme.typography.labelSmall,
-                                            modifier = Modifier.padding(vertical = 6.dp)
+                                            style = MaterialTheme.typography.titleSmall,
+                                            modifier = Modifier.padding(vertical = 4.dp)
                                         )
                                     })
                             }
