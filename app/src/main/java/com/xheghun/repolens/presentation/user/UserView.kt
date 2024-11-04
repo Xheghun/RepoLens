@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,19 +14,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.xheghun.repolens.R
 import com.xheghun.repolens.presentation.Routes
-import com.xheghun.repolens.presentation.search.SearchViewModel
+import com.xheghun.repolens.presentation.ScreenState
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.widget.PageTitle
 import com.xheghun.repolens.presentation.widget.SearchBar
 import com.xheghun.repolens.presentation.widget.UserItem
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun UserView(navController: NavHostController) {
-    val model = viewModel<SearchViewModel>()
+    val model = koinViewModel<UsersViewModel>()
+
+    val screenState = model.screenState.collectAsStateWithLifecycle().value
+    val users = model.userList.collectAsStateWithLifecycle().value
 
     Column(Modifier.padding(horizontal = 12.dp)) {
         PageTitle(title = "Users")
@@ -42,7 +46,7 @@ fun UserView(navController: NavHostController) {
 
 
             //USER LIST
-            if(false) {
+            if(users.isNotEmpty()) {
                 LazyColumn(Modifier.weight(1f)) {
                     items(12) {
                         UserItem { navController.navigate(Routes.UserDetails.name) }
@@ -51,7 +55,7 @@ fun UserView(navController: NavHostController) {
             }
 
             //EMPTY STATE
-            if(true) {
+             if (screenState == ScreenState.Default || (screenState == ScreenState.Result && users.isEmpty())) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
@@ -63,7 +67,7 @@ fun UserView(navController: NavHostController) {
                         painter = painterResource(id = R.drawable.search_prompt),
                         contentDescription = "empty search state"
                     )
-                    androidx.compose.material3.Text(
+                    Text(
                         text = "We’ve searched the ends of the earth and we’ve not found this user, please try again",
                         color = Black,
                         textAlign = TextAlign.Center,
