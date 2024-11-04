@@ -1,6 +1,5 @@
 package com.xheghun.repolens.presentation.widget
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,9 +25,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import coil3.compose.rememberAsyncImagePainter
 import com.xheghun.repolens.R
-import com.xheghun.repolens.data.models.Item
+import com.xheghun.repolens.data.models.Repo
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.theme.DeepPurple
 import com.xheghun.repolens.presentation.theme.GreyLight
@@ -38,7 +36,7 @@ import com.xheghun.repolens.presentation.theme.TealTransparent
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun RepoItem(repo: Item) {
+fun RepoItem(repo: Repo) {
     Surface(
         shadowElevation = 8.dp,
         modifier = Modifier

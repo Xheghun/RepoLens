@@ -41,15 +41,15 @@ fun UserView(navController: NavHostController) {
                 hint = "Search for users...",
                 value = model.searchValue.collectAsStateWithLifecycle().value,
                 onValueChange = { newValue -> model.updateSearchQuery(newValue) },
-                onSearchPressed = {}
+                onSearchPressed = { model.searchUser() }
             )
 
 
             //USER LIST
             if(users.isNotEmpty()) {
                 LazyColumn(Modifier.weight(1f)) {
-                    items(12) {
-                        UserItem { navController.navigate(Routes.UserDetails.name) }
+                    items(users.size) {index ->
+                        UserItem(users[index]) { navController.navigate(Routes.UserDetails.name) }
                     }
                 }
             }

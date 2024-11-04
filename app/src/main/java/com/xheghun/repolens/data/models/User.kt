@@ -1,6 +1,6 @@
 package com.xheghun.repolens.data.models
 
-data class Owner(
+data class User(
     val login: String? = "",
     val id: Long? = 0,
     val avatarURL: String? = "",

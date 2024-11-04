@@ -1,12 +1,10 @@
 package com.xheghun.repolens.presentation.widget
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,12 +20,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.xheghun.repolens.R
+import com.xheghun.repolens.data.models.User
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.Teal
 
 @Composable
-fun UserItem(onTap: () -> Unit) {
+fun UserItem(user: User, onTap: () -> Unit) {
     Surface(
         shadowElevation = 8.dp,
         modifier = Modifier
@@ -38,8 +38,10 @@ fun UserItem(onTap: () -> Unit) {
     ) {
         Row( Modifier
             .padding(8.dp)) {
-            Image(
-                painter = painterResource(id = R.drawable.repo_img),
+            AsyncImage(
+                error = painterResource(R.drawable.repo_img),
+                placeholder = painterResource(R.drawable.repo_img),
+                model = "${user.avatarURL}",
                 contentDescription = "user profile image",
                 modifier = Modifier
                     .size(30.dp)
@@ -51,11 +53,13 @@ fun UserItem(onTap: () -> Unit) {
             Box(Modifier.width(10.dp))
 
             Column {
-                Text(
-                    text = "Paige Brown",
-                    color = Teal,
-                    style = MaterialTheme.typography.labelSmall
-                )
+                user.login?.let {
+                    Text(
+                        text = it,
+                        color = Teal,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
                 Text(
                     text = "DynamicWebPaige",
                     style = MaterialTheme.typography.bodySmall

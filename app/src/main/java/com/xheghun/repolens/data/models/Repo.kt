@@ -1,11 +1,11 @@
 package com.xheghun.repolens.data.models
 
-data class Item(
+data class Repo(
     val id: Long? = 0,
     val name: String? = "",
     val fullName: String? = "",
     val private: Boolean? = false,
-    val owner: Owner? = null,
+    val owner: User? = null,
     val htmlURL: String? = "",
     val description: String? = "",
     val fork: Boolean? = false,

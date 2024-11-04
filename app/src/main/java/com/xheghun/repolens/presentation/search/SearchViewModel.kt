@@ -2,7 +2,7 @@ package com.xheghun.repolens.presentation.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xheghun.repolens.data.models.Item
+import com.xheghun.repolens.data.models.Repo
 import com.xheghun.repolens.domain.GithubServiceRepo
 import com.xheghun.repolens.presentation.ScreenState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ class SearchViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
         MutableStateFlow("Search Github repositories, issues and pull request!")
     val emptyStateText = _emptyStateText.asStateFlow()
 
-    private val _repoList = MutableStateFlow(listOf<Item>())
+    private val _repoList = MutableStateFlow(listOf<Repo>())
     val repoList = _repoList.asStateFlow()
 
     fun updateSearchQuery(value: String) {
