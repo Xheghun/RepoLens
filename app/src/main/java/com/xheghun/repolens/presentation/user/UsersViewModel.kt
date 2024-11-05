@@ -8,6 +8,7 @@ import com.xheghun.repolens.domain.GithubServiceRepo
 import com.xheghun.repolens.presentation.ScreenState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
@@ -23,8 +24,8 @@ class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
     private val _userList = MutableStateFlow(listOf<User>())
     val userList = _userList.asStateFlow()
 
-    private val _selectedUser = MutableStateFlow<User?>(null)
-    val selectedUser = _selectedUser.asStateFlow()
+    private val _selectedUserIndex = MutableStateFlow<Int?>(null)
+    val selectedUserIndex = _selectedUserIndex.asStateFlow()
 
     private val _selectedUserRepos = MutableStateFlow(listOf<Repo>())
     val selectedUserRepos = _selectedUserRepos.asStateFlow()
@@ -33,30 +34,35 @@ class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
         _searchValue.value = value
     }
 
-    fun updateSelectedUser(user: User) {
-        _selectedUser.value = user
+    fun updateSelectedUserIndex(userIndex: Int) {
+        _selectedUserIndex.value = userIndex
     }
 
     fun searchUser() {
         viewModelScope.launch {
             _screenState.value = ScreenState.Loading
 
-            apiRepo.searchUsers(_searchValue.value).onSuccess {
+            apiRepo.searchUsers(_searchValue.value)
+                .catch { _screenState.value }
+                .collect {
                 _screenState.value = ScreenState.Result
                 _userList.value = it
 
                 if (it.isEmpty()) _emptyStateText.value =
                     "We’ve searched the ends of the earth, repository not found, please try again"
-            }.onFailure {
-                _screenState.value = ScreenState.Result
             }
+
         }
     }
 
     fun getUserRepository() {
-        viewModelScope.launch {
-            apiRepo.fetchUserRepos(selectedUser.value?.login ?: searchValue.value).onSuccess {
-                _selectedUserRepos.value = it
+        _selectedUserIndex.value?.let {index ->
+            viewModelScope.launch {
+                apiRepo.fetchUserRepos(
+                    _userList.value[index].login ?: searchValue.value
+                ).onSuccess {
+                    _selectedUserRepos.value = it
+                }
             }
         }
     }

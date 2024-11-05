@@ -23,7 +23,6 @@ import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.widget.PageTitle
 import com.xheghun.repolens.presentation.widget.SearchBar
 import com.xheghun.repolens.presentation.widget.UserItem
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun UserView(navController: NavHostController, model: UsersViewModel) {
@@ -49,7 +48,7 @@ fun UserView(navController: NavHostController, model: UsersViewModel) {
                 LazyColumn(Modifier.weight(1f)) {
                     itemsIndexed(users) { index, user ->
                         UserItem(user) {
-                            model.updateSelectedUser(user)
+                            model.updateSelectedUserIndex(index)
                             navController.navigate(Routes.UserDetails.name)
                         }
                     }

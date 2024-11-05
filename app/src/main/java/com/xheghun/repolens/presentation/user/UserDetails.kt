@@ -16,11 +16,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,12 +37,12 @@ import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.IconColor
 import com.xheghun.repolens.presentation.widget.RepoItem
 import com.xheghun.repolens.presentation.widget.TextDrawable
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun UserDetails(navController: NavController, model: UsersViewModel) {
     val uriHandler = LocalUriHandler.current
-    val user = model.selectedUser.collectAsStateWithLifecycle().value
+    val user =
+        model.userList.collectAsStateWithLifecycle().value[model.selectedUserIndex.collectAsState().value!!]
     val userRepos = model.selectedUserRepos.collectAsStateWithLifecycle().value
 
     LaunchedEffect(Unit) {
@@ -79,18 +80,18 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
                 )
                 Box(Modifier.width(10.dp))
                 Column {
-                    user?.name?.let {
+                    user.name?.let {
                         Text(
                             it, style = MaterialTheme.typography.titleMedium
                         )
                         Box(Modifier.height(2.dp))
                     }
 
-                    user?.login?.let { Text(it, style = MaterialTheme.typography.bodyLarge) }
+                    user.login?.let { Text(it, style = MaterialTheme.typography.bodyLarge) }
                 }
             }
 
-            user?.bio?.let {
+            user.bio?.let {
                 Text(
                     it,
                     style = MaterialTheme.typography.displayMedium
@@ -98,7 +99,7 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
             }
 
             Row(Modifier.padding(vertical = 6.dp)) {
-                user?.location?.let {
+                user.location?.let {
                     TextDrawable(text = it, textColor = IconColor) {
                         Image(
                             painter = painterResource(id = R.drawable.location),
@@ -109,9 +110,9 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
                     Box(Modifier.width(6.dp))
                 }
 
-                if (!user?.blog.isNullOrEmpty()) {
-                    Box(Modifier.clickable { uriHandler.openUri(user?.blog!!) }) {
-                        TextDrawable(text = user?.blog!!) {
+                if (!user.blog.isNullOrEmpty()) {
+                    Box(Modifier.clickable { uriHandler.openUri(user.blog) }) {
+                        TextDrawable(text = user.blog) {
                             Image(
                                 painter = painterResource(id = R.drawable.link),
                                 contentDescription = "website icon"
@@ -122,7 +123,7 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
             }
 
             Row(Modifier.padding(vertical = 6.dp)) {
-                user?.followers?.let {
+                user.followers?.let {
                     TextDrawable(text = "$it followers .", textColor = IconColor) {
                         Image(
                             painter = painterResource(id = R.drawable.people),
@@ -133,7 +134,7 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
                     Box(Modifier.width(6.dp))
                 }
 
-                user?.following?.let {
+                user.following?.let {
                     Text(
                         text = "$it following",
                         color = IconColor,
@@ -176,7 +177,7 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
         //REPO LIST
 
         LazyColumn(Modifier.weight(1f)) {
-            itemsIndexed(userRepos) { index, repo ->
+            itemsIndexed(userRepos) { _, repo ->
                 RepoItem(repo)
             }
         }
@@ -194,8 +195,8 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
                     painter = painterResource(id = R.drawable.empty_user_repo),
                     contentDescription = "empty search state"
                 )
-                androidx.compose.material3.Text(
-                    text = "This user  doesn’t have repositories yet, come back later :-)",
+                Text(
+                    text = "This user doesn’t have repositories yet, come back later :-)",
                     color = Black,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(vertical = 10.dp)
