@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -15,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -31,13 +33,18 @@ fun UserItem(user: User, onTap: () -> Unit) {
     Surface(
         shadowElevation = 8.dp,
         modifier = Modifier
+            .fillMaxWidth()
             .padding(vertical = 8.dp)
             .border(0.5.dp, GreyLight, RoundedCornerShape(4.dp))
             .clip(RoundedCornerShape(4.dp))
             .clickable { onTap.invoke() }
     ) {
-        Row( Modifier
-            .padding(8.dp)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier =
+            Modifier
+                .padding(8.dp)
+        ) {
             AsyncImage(
                 error = painterResource(R.drawable.repo_img),
                 placeholder = painterResource(R.drawable.repo_img),
@@ -53,36 +60,46 @@ fun UserItem(user: User, onTap: () -> Unit) {
             Box(Modifier.width(10.dp))
 
             Column {
-                user.login?.let {
+                user.name?.let {
                     Text(
                         text = it,
                         color = Teal,
                         style = MaterialTheme.typography.labelSmall
                     )
                 }
-                Text(
-                    text = "DynamicWebPaige",
-                    style = MaterialTheme.typography.bodySmall
-                )
+                user.login?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
 
-                Text(
-                    "These are random words that will be replaced in due time. Config files for my github profile",
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
+                user.bio?.let {
+                    Text(
+                        it,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                }
 
                 Row {
-                    Text(
-                        "Lagos,Nigeria",
-                        color = Color.Gray,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Box(Modifier.width(10.dp))
-                    Text(
-                        "momoko@gmail.com",
-                        color = Color.Gray,
-                        style = MaterialTheme.typography.bodySmall
-                    )
+                    user.location?.let {
+                        Text(
+                            it,
+                            color = Color.Gray,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+
+                        Box(Modifier.width(10.dp))
+                    }
+
+                    user.email?.let {
+                        Text(
+                            it,
+                            color = Color.Gray,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
                 }
             }
         }

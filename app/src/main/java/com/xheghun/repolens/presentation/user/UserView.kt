@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,8 +26,7 @@ import com.xheghun.repolens.presentation.widget.UserItem
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun UserView(navController: NavHostController) {
-    val model = koinViewModel<UsersViewModel>()
+fun UserView(navController: NavHostController, model: UsersViewModel) {
 
     val screenState = model.screenState.collectAsStateWithLifecycle().value
     val users = model.userList.collectAsStateWithLifecycle().value
@@ -44,18 +44,20 @@ fun UserView(navController: NavHostController) {
                 onSearchPressed = { model.searchUser() }
             )
 
-
             //USER LIST
-            if(users.isNotEmpty()) {
+            if (users.isNotEmpty()) {
                 LazyColumn(Modifier.weight(1f)) {
-                    items(users.size) {index ->
-                        UserItem(users[index]) { navController.navigate(Routes.UserDetails.name) }
+                    itemsIndexed(users) { index, user ->
+                        UserItem(user) {
+                            model.updateSelectedUser(user)
+                            navController.navigate(Routes.UserDetails.name)
+                        }
                     }
                 }
             }
 
             //EMPTY STATE
-             if (screenState == ScreenState.Default || (screenState == ScreenState.Result && users.isEmpty())) {
+            if (screenState == ScreenState.Default || (screenState == ScreenState.Result && users.isEmpty())) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,

@@ -28,6 +28,8 @@ import com.xheghun.repolens.presentation.search.SearchView
 import com.xheghun.repolens.presentation.theme.RepoLensTheme
 import com.xheghun.repolens.presentation.user.UserDetails
 import com.xheghun.repolens.presentation.user.UserView
+import com.xheghun.repolens.presentation.user.UsersViewModel
+import org.koin.androidx.compose.navigation.koinNavViewModel
 
 data class TopLevelRoute<T : Any>(
     val name: String,
@@ -96,6 +98,7 @@ class MainActivity : ComponentActivity() {
 
                     }
                 ) { innerPadding ->
+                    val userViewModel = koinNavViewModel<UsersViewModel>()
                     NavHost(
                         navController = navController,
                         startDestination = Routes.UserDetails.name,
@@ -103,8 +106,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Routes.Home.name) { HomeView(navController) }
                         composable(Routes.Repositories.name) { SearchView(navController) }
-                        composable(Routes.Users.name) { UserView(navController) }
-                        composable(Routes.UserDetails.name) { UserDetails(navController) }
+                        composable(Routes.Users.name) { UserView(navController, userViewModel) }
+                        composable(Routes.UserDetails.name) { UserDetails(navController, userViewModel) }
                     }
                 }
 

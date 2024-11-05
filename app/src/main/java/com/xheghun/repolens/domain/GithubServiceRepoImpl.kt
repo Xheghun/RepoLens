@@ -10,6 +10,13 @@ class GithubServiceRepoImpl(private val apiService: GithubApiService) : GithubSe
     }
 
     override suspend fun searchUsers(value: String): Result<List<User>> = runCatching {
-        apiService.searchUser(value).items
+        apiService.searchUser(value).items.map { user -> fetchUser(user.login!!) }
+    }
+
+    override suspend fun fetchUser(user: String): User =
+        apiService.fetchUserInfo(user)
+
+    override suspend fun fetchUserRepos(user: String): Result<List<Repo>> = runCatching {
+        apiService.fetchUserRepo(user)
     }
 }

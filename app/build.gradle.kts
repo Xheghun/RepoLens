@@ -74,9 +74,13 @@ dependencies {
 
     implementation("androidx.compose.material:material:1.7.5")
 
+    //ANIMATION
+    implementation(libs.compose.animation)
+
     //DI
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
+    implementation(libs.koin.compose.navigation)
     implementation(libs.koin.android)
 
     //NETWORK
