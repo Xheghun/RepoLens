@@ -43,7 +43,7 @@ class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
             _screenState.value = ScreenState.Loading
 
             apiRepo.searchUsers(_searchValue.value)
-                .catch { _screenState.value }
+                .catch { _screenState.value = ScreenState.Result }
                 .collect {
                     _screenState.value = ScreenState.Result
                     _userList.value = it
@@ -56,13 +56,19 @@ class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
     }
 
     fun getUserRepository() {
+        //check if we already have the repo list
+        if (_selectedUserRepos.value.isNotEmpty()) return
+
         _selectedUserIndex.value?.let { index ->
+            _screenState.value = ScreenState.Loading
             viewModelScope.launch {
                 apiRepo.fetchUserRepos(
                     _userList.value[index].login ?: searchValue.value
                 ).onSuccess {
+                    _screenState.value = ScreenState.Result
                     _selectedUserRepos.value = it
                 }
+                    .onFailure { _screenState.value = ScreenState.Result }
             }
         }
     }

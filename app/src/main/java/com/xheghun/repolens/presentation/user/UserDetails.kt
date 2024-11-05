@@ -36,6 +36,7 @@ import com.xheghun.repolens.presentation.ScreenState
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.IconColor
+import com.xheghun.repolens.presentation.widget.ProgressIndicator
 import com.xheghun.repolens.presentation.widget.RepoItem
 import com.xheghun.repolens.presentation.widget.TextDrawable
 import com.xheghun.repolens.presentation.widget.screenWidthPercentage
@@ -183,6 +184,21 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
                 RepoItem(repo, true)
             }
         }
+
+
+        //LOADING
+        if (screenState == ScreenState.Loading) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                ProgressIndicator()
+            }
+        }
+
 
         //EMPTY STATE
         if (screenState == ScreenState.Default || (screenState == ScreenState.Result && userRepos.isEmpty())) {

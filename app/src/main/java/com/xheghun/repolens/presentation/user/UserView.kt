@@ -24,6 +24,7 @@ import com.xheghun.repolens.presentation.Routes
 import com.xheghun.repolens.presentation.ScreenState
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.widget.PageTitle
+import com.xheghun.repolens.presentation.widget.ProgressIndicator
 import com.xheghun.repolens.presentation.widget.SearchBar
 import com.xheghun.repolens.presentation.widget.UserItem
 import com.xheghun.repolens.presentation.widget.screenWidthPercentage
@@ -69,6 +70,18 @@ fun UserView(navController: NavHostController, model: UsersViewModel) {
                 }
             }
 
+            //LOADING
+            if (screenState == ScreenState.Loading) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                ) {
+                    ProgressIndicator()
+                }
+            }
 
             //EMPTY STATE
             if (screenState == ScreenState.Default || (screenState == ScreenState.Result && users.isEmpty())) {
