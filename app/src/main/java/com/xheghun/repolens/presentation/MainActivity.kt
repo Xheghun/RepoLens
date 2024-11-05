@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -89,6 +90,8 @@ class MainActivity : ComponentActivity() {
                                     label = {
                                         Text(
                                             screen.name,
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis,
                                             style = MaterialTheme.typography.titleSmall,
                                             modifier = Modifier.padding(vertical = 4.dp)
                                         )
@@ -101,7 +104,7 @@ class MainActivity : ComponentActivity() {
                     val userViewModel = koinNavViewModel<UsersViewModel>()
                     NavHost(
                         navController = navController,
-                        startDestination = Routes.UserDetails.name,
+                        startDestination = Routes.Home.name,
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(Routes.Home.name) { HomeView(navController) }

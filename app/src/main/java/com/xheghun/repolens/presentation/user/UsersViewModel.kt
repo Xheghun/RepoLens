@@ -18,8 +18,8 @@ class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
     private val _screenState = MutableStateFlow(ScreenState.Default)
     val screenState = _screenState.asStateFlow()
 
-    private val _emptyStateText = MutableStateFlow("Search for  Github users...")
-    val emptyStateText = _emptyStateText.asStateFlow()
+    private val _emptySearchStateText = MutableStateFlow("Search for  Github users...")
+    val emptySearchStateText = _emptySearchStateText.asStateFlow()
 
     private val _userList = MutableStateFlow(listOf<User>())
     val userList = _userList.asStateFlow()
@@ -45,18 +45,18 @@ class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
             apiRepo.searchUsers(_searchValue.value)
                 .catch { _screenState.value }
                 .collect {
-                _screenState.value = ScreenState.Result
-                _userList.value = it
+                    _screenState.value = ScreenState.Result
+                    _userList.value = it
 
-                if (it.isEmpty()) _emptyStateText.value =
-                    "We’ve searched the ends of the earth, repository not found, please try again"
-            }
+                    if (it.isEmpty()) _emptySearchStateText.value =
+                        "We’ve searched the ends of the earth, repository not found, please try again"
+                }
 
         }
     }
 
     fun getUserRepository() {
-        _selectedUserIndex.value?.let {index ->
+        _selectedUserIndex.value?.let { index ->
             viewModelScope.launch {
                 apiRepo.fetchUserRepos(
                     _userList.value[index].login ?: searchValue.value
@@ -65,5 +65,9 @@ class UsersViewModel(private val apiRepo: GithubServiceRepo) : ViewModel() {
                 }
             }
         }
+    }
+
+    fun clearRepos() {
+        _selectedUserRepos.value = listOf()
     }
 }

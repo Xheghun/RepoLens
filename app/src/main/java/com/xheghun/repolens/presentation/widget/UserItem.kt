@@ -5,6 +5,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.xheghun.repolens.R
@@ -28,6 +31,7 @@ import com.xheghun.repolens.data.models.User
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.Teal
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun UserItem(user: User, onTap: () -> Unit) {
     Surface(
@@ -82,10 +86,12 @@ fun UserItem(user: User, onTap: () -> Unit) {
                     )
                 }
 
-                Row {
+                FlowRow {
                     user.location?.let {
                         Text(
                             it,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                             color = Color.Gray,
                             style = MaterialTheme.typography.bodySmall
                         )
@@ -96,6 +102,8 @@ fun UserItem(user: User, onTap: () -> Unit) {
                     user.email?.let {
                         Text(
                             it,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                             color = Color.Gray,
                             style = MaterialTheme.typography.bodySmall
                         )

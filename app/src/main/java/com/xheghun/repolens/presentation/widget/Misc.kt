@@ -5,6 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -15,4 +17,14 @@ fun PageTitle(title: String) {
         modifier = Modifier
             .padding(vertical = 25.dp)
     )
+}
+
+
+@Composable
+fun screenWidthPercentage(p: Float): Dp {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
+    val fifteenPercentWidth = screenWidth * p
+    return fifteenPercentWidth
 }

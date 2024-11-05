@@ -2,14 +2,17 @@ package com.xheghun.repolens.presentation.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,6 +25,7 @@ import com.xheghun.repolens.presentation.theme.EmptyState
 import com.xheghun.repolens.presentation.widget.PageTitle
 import com.xheghun.repolens.presentation.widget.RepoItem
 import com.xheghun.repolens.presentation.widget.SearchBar
+import com.xheghun.repolens.presentation.widget.screenWidthPercentage
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -30,6 +34,8 @@ fun SearchView(navController: NavHostController) {
     val model = koinViewModel<SearchViewModel>()
     val repos = model.repoList.collectAsStateWithLifecycle().value
     val screenState = model.screenState.collectAsStateWithLifecycle().value
+
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Column(
         Modifier
@@ -44,8 +50,13 @@ fun SearchView(navController: NavHostController) {
             hint = "Search for repositories...",
             value = model.searchValue.collectAsStateWithLifecycle().value,
             onValueChange = { newValue -> model.updateSearchQuery(newValue) },
-            onSearchPressed = { model.searchRepo() }
+            onSearchPressed = {
+                keyboardController?.hide()
+                model.searchRepo()
+            }
         )
+
+        Box(Modifier.height(6.dp))
 
         //RESULT LIST
         if (repos.isNotEmpty())
@@ -72,7 +83,10 @@ fun SearchView(navController: NavHostController) {
                     text = model.emptyStateText.collectAsStateWithLifecycle().value,
                     color = EmptyState,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(vertical = 10.dp)
+                    modifier = Modifier.padding(
+                        vertical = 10.dp,
+                        horizontal = screenWidthPercentage(0.15f)
+                    )
                 )
             }
 

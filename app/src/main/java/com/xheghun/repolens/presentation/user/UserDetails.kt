@@ -32,15 +32,18 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.xheghun.repolens.R
+import com.xheghun.repolens.presentation.ScreenState
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.IconColor
 import com.xheghun.repolens.presentation.widget.RepoItem
 import com.xheghun.repolens.presentation.widget.TextDrawable
+import com.xheghun.repolens.presentation.widget.screenWidthPercentage
 
 @Composable
 fun UserDetails(navController: NavController, model: UsersViewModel) {
     val uriHandler = LocalUriHandler.current
+    val screenState = model.screenState.collectAsStateWithLifecycle().value
     val user =
         model.userList.collectAsStateWithLifecycle().value[model.selectedUserIndex.collectAsState().value!!]
     val userRepos = model.selectedUserRepos.collectAsStateWithLifecycle().value
@@ -175,15 +178,14 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
         }
 
         //REPO LIST
-
         LazyColumn(Modifier.weight(1f)) {
             itemsIndexed(userRepos) { _, repo ->
-                RepoItem(repo)
+                RepoItem(repo, true)
             }
         }
 
         //EMPTY STATE
-        if (userRepos.isEmpty()) {
+        if (screenState == ScreenState.Default || (screenState == ScreenState.Result && userRepos.isEmpty())) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -199,7 +201,10 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
                     text = "This user doesn’t have repositories yet, come back later :-)",
                     color = Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(vertical = 10.dp)
+                    modifier = Modifier.padding(
+                        vertical = 10.dp,
+                        horizontal = screenWidthPercentage(0.15f)
+                    )
                 )
             }
         }
