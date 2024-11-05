@@ -74,8 +74,8 @@ dependencies {
 
     implementation("androidx.compose.material:material:1.7.5")
 
-    //ANIMATION
-    implementation(libs.compose.animation)
+    //SPLASH SCREEN
+    implementation(libs.androidx.splashscreen)
 
     //DI
     implementation(libs.koin.core)
