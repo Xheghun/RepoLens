@@ -33,6 +33,7 @@ This project follows the MVVM architecture pattern and clean code principles, en
 structured and maintainable codebase.
 
 - Retrofit: handling Networking operations
+- Gson: for JSON deserialization
 - Coil: for image processing
 - Koin: a simple lightweight library for dependency injection
 - Mockito: to mock dependencies in Unit tests
