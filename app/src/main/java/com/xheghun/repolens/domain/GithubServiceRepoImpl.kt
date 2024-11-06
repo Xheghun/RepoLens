@@ -15,6 +15,15 @@ class GithubServiceRepoImpl(private val apiService: GithubApiService) : GithubSe
         apiService.searchRepository(value).items
     }
 
+
+    /*
+    * The Github /search/users API doesn't return the complete user details, so we have to make another request
+    * to users/{userName}
+    *
+    * In order to mitigate the time to the flow api would be user to initially emit the partial data
+    * and then emit the complete details once it's available. This significantly reduces the amount of time take
+    * to return the search result
+    * */
     override suspend fun searchUsers(value: String): Flow<List<User>> = flow {
         val matchedUsers = apiService.searchUser(value).items
         emit(matchedUsers)
