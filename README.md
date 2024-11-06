@@ -6,7 +6,7 @@ This app allows users search for github repos and users, using the [Github API](
 
 to successfully build and run this project locally, you would need to
 
-- create a `credentials.properties` file in the
+- create a `credentials.properties` file in the project root
 - define your `githubaccessToken` value like this.
 
 ```properties
