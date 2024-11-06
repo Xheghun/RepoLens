@@ -12,4 +12,4 @@ githubAccessToken = "<YOUR-GITHUB-ACCESS-TOKEN>"
 -- --
 
 ### Artifact
-if you'd rather skip the steps above you can download the apk [here]("https://drive.google.com/file/d/1YyXF5Av2t2AopJscrEYU1I1rzgYn7T1B/view?usp=drive_link")
+if you'd rather skip the steps above you can download the apk [here](https://drive.google.com/file/d/1YyXF5Av2t2AopJscrEYU1I1rzgYn7T1B/view?usp=drive_link)
