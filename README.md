@@ -19,7 +19,7 @@ if you need help generating a github access token this [doc](https://docs.github
 ### Artifact
 
 if you'd rather skip the steps above you can download the
-apk [here](https://drive.google.com/file/d/1YyXF5Av2t2AopJscrEYU1I1rzgYn7T1B/view?usp=drive_link)
+apk [here](https://drive.google.com/file/d/1d9pBRcxas1fe0NffhMe88_0Ci7wfg6yt/view?usp=sharing)
 
 ### Images
 
