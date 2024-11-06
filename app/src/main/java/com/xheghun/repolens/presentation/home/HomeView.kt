@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.xheghun.repolens.R
-import com.xheghun.repolens.presentation.Routes
+import com.xheghun.repolens.presentation.helpers.Routes
 import com.xheghun.repolens.presentation.theme.DeepPurple
 import com.xheghun.repolens.presentation.theme.PurpleTransparent
 import com.xheghun.repolens.presentation.theme.Teal

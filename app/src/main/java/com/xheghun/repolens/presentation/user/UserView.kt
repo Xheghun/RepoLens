@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.xheghun.repolens.R
-import com.xheghun.repolens.presentation.Routes
-import com.xheghun.repolens.presentation.ScreenState
+import com.xheghun.repolens.presentation.helpers.Routes
+import com.xheghun.repolens.presentation.helpers.ScreenState
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.widget.PageTitle
 import com.xheghun.repolens.presentation.widget.ProgressIndicator

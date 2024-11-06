@@ -17,10 +17,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.xheghun.repolens.R
-import com.xheghun.repolens.presentation.ScreenState
+import com.xheghun.repolens.presentation.helpers.ScreenState
 import com.xheghun.repolens.presentation.theme.EmptyState
 import com.xheghun.repolens.presentation.widget.PageTitle
 import com.xheghun.repolens.presentation.widget.ProgressIndicator

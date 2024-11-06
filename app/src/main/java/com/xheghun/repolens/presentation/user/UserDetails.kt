@@ -33,7 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.xheghun.repolens.R
-import com.xheghun.repolens.presentation.ScreenState
+import com.xheghun.repolens.presentation.helpers.ScreenState
 import com.xheghun.repolens.presentation.theme.Black
 import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.IconColor

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xheghun.repolens.data.models.Repo
 import com.xheghun.repolens.domain.GithubServiceRepo
-import com.xheghun.repolens.presentation.ScreenState
+import com.xheghun.repolens.presentation.helpers.ScreenState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
