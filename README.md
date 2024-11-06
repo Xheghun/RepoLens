@@ -18,12 +18,14 @@ if you need help generating a github access token
 this [doc](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
 should help.
 
--- --
+---
 
 ### Artifact
 
 if you'd rather skip the steps above you can download the
 apk [here](https://drive.google.com/file/d/1d9pBRcxas1fe0NffhMe88_0Ci7wfg6yt/view?usp=sharing)
+
+---
 
 ### Architecture
 
@@ -36,7 +38,7 @@ structured and maintainable codebase.
 - Mockito: to mock dependencies in Unit tests
 - Androidx Splashscreen: a backward compatible splashscreen API
 
--- --
+---
 
 ### Images
 
