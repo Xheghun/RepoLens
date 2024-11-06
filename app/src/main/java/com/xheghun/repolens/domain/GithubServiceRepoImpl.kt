@@ -11,9 +11,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 class GithubServiceRepoImpl(private val apiService: GithubApiService) : GithubServiceRepo {
-    override suspend fun searchRepository(value: String): Result<List<Repo>> = runCatching {
-        apiService.searchRepository(value).items
-    }
+    override suspend fun searchRepository(value: String): Result<List<Repo>> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                apiService.searchRepository(value).items
+            }
+        }
 
 
     /*
@@ -24,23 +27,29 @@ class GithubServiceRepoImpl(private val apiService: GithubApiService) : GithubSe
     * and then emit the complete details once it's available. This significantly reduces the amount of time take
     * to return the search result
     * */
-    override suspend fun searchUsers(value: String): Flow<List<User>> = flow {
-        val matchedUsers = apiService.searchUser(value).items
-        emit(matchedUsers)
+    override suspend fun searchUsers(value: String): Flow<List<User>> =
+        withContext(Dispatchers.IO) {
+            flow {
+                val matchedUsers = apiService.searchUser(value).items
+                emit(matchedUsers)
 
-        val matchedUsersProfile =
-            withContext(Dispatchers.IO) {
-                matchedUsers.map { user -> async { fetchUser(user.login!!) } }.awaitAll()
+                val matchedUsersProfile =
+                    withContext(Dispatchers.IO) {
+                        matchedUsers.map { user -> async { fetchUser(user.login!!) } }.awaitAll()
+                    }
+
+                emit(matchedUsersProfile)
+
             }
-
-        emit(matchedUsersProfile)
-
-    }
+        }
 
     override suspend fun fetchUser(user: String): User =
         apiService.fetchUserInfo(user)
 
-    override suspend fun fetchUserRepos(user: String): Result<List<Repo>> = runCatching {
-        apiService.fetchUserRepo(user)
-    }
+    override suspend fun fetchUserRepos(user: String): Result<List<Repo>> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                apiService.fetchUserRepo(user)
+            }
+        }
 }

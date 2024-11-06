@@ -6,6 +6,7 @@ import com.xheghun.repolens.data.models.Repo
 import com.xheghun.repolens.data.models.User
 import com.xheghun.repolens.domain.GithubServiceRepo
 import com.xheghun.repolens.presentation.ScreenState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
