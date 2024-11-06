@@ -36,6 +36,7 @@ import com.xheghun.repolens.presentation.theme.GreyLight
 import com.xheghun.repolens.presentation.theme.Lime
 import com.xheghun.repolens.presentation.theme.Teal
 import com.xheghun.repolens.presentation.theme.TealTransparent
+import timeAgo
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -152,18 +153,18 @@ fun RepoItem(repo: Repo, userRepo: Boolean = false) {
 
             if (userRepo) {
                 Row(Modifier.padding(vertical = 4.dp)) {
-                    if (repo.fork == true && !repo.forksURL.isNullOrEmpty()) {
-                        Text(
-                            "Forked from ${repo.forksURL}",
-                            style = MaterialTheme.typography.displaySmall,
-                            color = Grey
-                        )
-                        Box(Modifier.width(6.dp))
-                    }
-
+                    /*      if (repo.fork == true && !repo.forksURL.isNullOrEmpty()) {
+                              Text(
+                                  "Forked from ${repo.forksURL}",
+                                  style = MaterialTheme.typography.displaySmall,
+                                  color = Grey
+                              )
+                              Box(Modifier.width(6.dp))
+                          }
+      */
                     if (!repo.updatedAt.isNullOrEmpty()) {
                         Text(
-                            "Updated ${repo.updatedAt} ago",
+                            "Updated ${timeAgo(repo.updatedAt)}",
                             style = MaterialTheme.typography.displaySmall,
                             color = Grey
                         )

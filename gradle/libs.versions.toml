@@ -18,9 +18,12 @@ splashVersion = "1.0.1"
 mockitoCoreVersion = "5.10.0"
 mockitoKotlinVersion = "5.2.1"
 coroutineTest = "1.7.3"
+threeTenVersion = "1.3.1"
+kotlinTestVersion = "1.9.22"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlinTestVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -49,6 +52,7 @@ coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", versi
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCoreVersion" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlinVersion" }
 kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
+threeten = { group = "com.jakewharton.threetenabp", name = "threetenabp", version.ref = "threeTenVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

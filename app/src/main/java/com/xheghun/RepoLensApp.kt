@@ -1,6 +1,7 @@
 package com.xheghun
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.xheghun.repolens.di.appModule
 import com.xheghun.repolens.di.networkingModule
 import com.xheghun.repolens.di.viewModelModule
@@ -12,7 +13,7 @@ class RepoLensApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        AndroidThreeTen.init(this)
         startKoin {
             androidLogger()
             androidContext(this@RepoLensApp)

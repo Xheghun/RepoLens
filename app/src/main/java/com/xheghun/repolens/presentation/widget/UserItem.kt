@@ -44,7 +44,6 @@ fun UserItem(user: User, onTap: () -> Unit) {
             .clickable { onTap.invoke() }
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
             modifier =
             Modifier
                 .padding(8.dp)
@@ -63,8 +62,8 @@ fun UserItem(user: User, onTap: () -> Unit) {
 
             Box(Modifier.width(10.dp))
 
-            Column {
-                user.name?.let {
+            Column(Modifier.align(Alignment.CenterVertically)) {
+                user.name.takeIf { !it.isNullOrEmpty() }?.let {
                     Text(
                         text = it,
                         color = Teal,
@@ -74,11 +73,11 @@ fun UserItem(user: User, onTap: () -> Unit) {
                 user.login?.let {
                     Text(
                         text = it,
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall,
                     )
                 }
 
-                user.bio?.let {
+                user.bio.takeIf { !it.isNullOrEmpty() }?.let {
                     Text(
                         it,
                         style = MaterialTheme.typography.bodySmall,
@@ -87,7 +86,7 @@ fun UserItem(user: User, onTap: () -> Unit) {
                 }
 
                 FlowRow {
-                    user.location?.let {
+                    user.location.takeIf { !it.isNullOrEmpty() }?.let {
                         Text(
                             it,
                             maxLines = 1,
@@ -99,7 +98,7 @@ fun UserItem(user: User, onTap: () -> Unit) {
                         Box(Modifier.width(10.dp))
                     }
 
-                    user.email?.let {
+                    user.email.takeIf { !it.isNullOrEmpty() }?.let {
                         Text(
                             it,
                             maxLines = 1,

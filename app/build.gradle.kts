@@ -72,8 +72,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.compose.navigation)
 
-    implementation("androidx.compose.material:material:1.7.5")
-
     //SPLASH SCREEN
     implementation(libs.androidx.splashscreen)
 
@@ -94,12 +92,15 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
 
+    //TIME UTILS
+    implementation(libs.threeten)
+
     //TEST
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlin.coroutines.test)
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.22")
+    testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

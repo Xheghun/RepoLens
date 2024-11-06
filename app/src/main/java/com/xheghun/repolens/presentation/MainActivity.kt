@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
@@ -56,15 +59,15 @@ class MainActivity : ComponentActivity() {
                         val navBackStackEntry by navController.currentBackStackEntryAsState()
                         val currentDestination = navBackStackEntry?.destination
 
-                        BottomNavigation(
-                            backgroundColor = Color.White,
+                        NavigationBar(
+                            containerColor = Color.White,
+                            tonalElevation = 12.dp,
                         ) {
                             screens.forEach { screen ->
                                 val isSelected = currentDestination?.hierarchy?.any {
                                     it.hasRoute(screen.route.name, null)
                                 } == true
-                                BottomNavigationItem(
-                                    modifier = Modifier.padding(10.dp),
+                                NavigationBarItem(
                                     selected = isSelected,
                                     onClick = {
                                         navController.navigate(screen.route.name) {
@@ -93,9 +96,10 @@ class MainActivity : ComponentActivity() {
                                             maxLines = 1,
                                             overflow = TextOverflow.Ellipsis,
                                             style = MaterialTheme.typography.titleSmall,
-                                            modifier = Modifier.padding(vertical = 4.dp)
                                         )
-                                    })
+                                    },
+                                    colors = NavigationBarItemDefaults.colors(indicatorColor = Color.White)
+                                )
                             }
                         }
 

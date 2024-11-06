@@ -1,26 +1,20 @@
 package com.xheghun.repolens.data.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Repo(
     val id: Long? = 0,
     val name: String? = "",
-    val fullName: String? = "",
     val private: Boolean? = false,
     val owner: User? = null,
     val htmlURL: String? = "",
     val description: String? = "",
-    val fork: Boolean? = false,
-    val url: String? = "",
-    val forksURL: String? = "",
-    val deploymentsURL: String? = "",
+    @SerializedName("created_at")
     val createdAt: String? = "",
+    @SerializedName("updated_at")
     val updatedAt: String? = "",
+    @SerializedName("stargazers_count")
     val stargazersCount: Long? = 0,
     val language: String? = "",
-    val topics: List<String>? = listOf(),
-    val visibility: String? = "",
-    val forks: Long? = 0,
-    val openIssues: Long? = 0,
-    val watchers: Long? = 0,
-    val defaultBranch: String? = "",
-    val score: Long? = 0
+    val topics: List<String>? = listOf()
 )
