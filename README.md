@@ -23,7 +23,7 @@ should help.
 ### Artifact
 
 if you'd rather skip the steps above you can download the
-apk [here](https://drive.google.com/file/d/1d9pBRcxas1fe0NffhMe88_0Ci7wfg6yt/view?usp=sharing)
+apk [here](https://drive.google.com/file/d/1GIMpNKvf4y0P5VaQFtRhlmha9jBCXHdE/view?usp=sharing)
 
 ---
 
