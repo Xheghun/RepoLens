@@ -94,7 +94,12 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
 
+    //TEST
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.22")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

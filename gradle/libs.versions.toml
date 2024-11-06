@@ -15,6 +15,9 @@ okhttpVersion = "4.11.0"
 coilVersion = "3.0.0-rc02"
 animationVersion = "1.7.5"
 splashVersion = "1.0.1"
+mockitoCoreVersion = "5.10.0"
+mockitoKotlinVersion = "5.2.1"
+coroutineTest = "1.7.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +46,9 @@ squareup-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 squareup-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilVersion" }
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coilVersion" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCoreVersion" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlinVersion" }
+kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
