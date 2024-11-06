@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import coil3.compose.AsyncImage
 import com.xheghun.repolens.R
 import com.xheghun.repolens.presentation.ScreenState
 import com.xheghun.repolens.presentation.theme.Black
@@ -74,9 +75,9 @@ fun UserDetails(navController: NavController, model: UsersViewModel) {
 
         //PROFILE DETAILS HEADER
         Column {
-            Row(Modifier.padding(vertical = 6.dp)) {
-                Image(
-                    painter = painterResource(R.drawable.repo_img),
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 6.dp)) {
+                AsyncImage(
+                    "${user.avatarURL}",
                     contentDescription = "profile image",
                     modifier = Modifier
                         .size(50.dp)
