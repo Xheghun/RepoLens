@@ -1,6 +1,6 @@
 ## Repo Lens
 
-This app allows users search for github repos and users, using the (Github API)[https://docs.github.com/en/rest?apiVersion=2022-11-28]
+This app allows users search for github repos and users, using the [Github API](https://docs.github.com/en/rest?apiVersion=2022-11-28)
 
 ### Setup Up
 
