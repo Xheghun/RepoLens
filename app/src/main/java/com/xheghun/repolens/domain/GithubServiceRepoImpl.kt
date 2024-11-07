@@ -18,12 +18,11 @@ class GithubServiceRepoImpl(private val apiService: GithubApiService) : GithubSe
             }
         }
 
-
     /*
     * The Github /search/users API doesn't return the complete user details, so we have to make another request
-    * to users/{userName}
+    * to users/{userName} to get it.
     *
-    * In order to mitigate the time to the flow api would be user to initially emit the partial data
+    * In order to mitigate this, the flow api would be used to initially emit the partial data
     * and then emit the complete details once it's available. This significantly reduces the amount of time take
     * to return the search result
     * */
