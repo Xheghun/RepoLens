@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 val credentialsPropFile = rootProject.file("credentials.properties")
@@ -94,6 +95,11 @@ dependencies {
 
     //TIME UTILS
     implementation(libs.threeten)
+
+    //ROOM
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.room.kotlin)
 
     //TEST
     testImplementation(libs.junit)

@@ -3,6 +3,7 @@ package com.xheghun
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.xheghun.repolens.di.appModule
+import com.xheghun.repolens.di.databaseModule
 import com.xheghun.repolens.di.networkingModule
 import com.xheghun.repolens.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -17,7 +18,14 @@ class RepoLensApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@RepoLensApp)
-            modules(listOf(appModule(), networkingModule(), viewModelModule()))
+            modules(
+                listOf(
+                    appModule(),
+                    networkingModule(),
+                    viewModelModule(),
+                    databaseModule(this@RepoLensApp)
+                )
+            )
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.xheghun.repolens
 
 import com.xheghun.repolens.data.api.GithubApiService
+import com.xheghun.repolens.data.database.GithubRepoDatabase
 import com.xheghun.repolens.data.models.Repo
 import com.xheghun.repolens.data.models.RepoSearchResult
 import com.xheghun.repolens.data.models.User
@@ -28,6 +29,7 @@ class GithubServiceRepoTest {
 
     @Mock
     private lateinit var apiService: GithubApiService
+    private lateinit var dao: GithubRepoDatabase
     private lateinit var githubServiceRepo: GithubServiceRepo
     private val testDispatcher = StandardTestDispatcher()
 
@@ -35,7 +37,7 @@ class GithubServiceRepoTest {
     fun setup() {
         MockitoAnnotations.openMocks(this)
         Dispatchers.setMain(testDispatcher)
-        githubServiceRepo = GithubServiceRepoImpl(apiService)
+        githubServiceRepo = GithubServiceRepoImpl(apiService, dao)
     }
 
     @After

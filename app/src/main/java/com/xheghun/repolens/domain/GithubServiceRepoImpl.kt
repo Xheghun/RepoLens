@@ -1,6 +1,10 @@
 package com.xheghun.repolens.domain
 
+import android.util.Log
 import com.xheghun.repolens.data.api.GithubApiService
+import com.xheghun.repolens.data.database.GithubRepoDatabase
+import com.xheghun.repolens.data.entities.toUser
+import com.xheghun.repolens.data.entities.toUserEntity
 import com.xheghun.repolens.data.models.Repo
 import com.xheghun.repolens.data.models.User
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +14,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
-class GithubServiceRepoImpl(private val apiService: GithubApiService) : GithubServiceRepo {
+class GithubServiceRepoImpl(
+    private val apiService: GithubApiService,
+    private val githubRepoDatabase: GithubRepoDatabase
+) : GithubServiceRepo {
     override suspend fun searchRepository(value: String): Result<List<Repo>> =
         withContext(Dispatchers.IO) {
             runCatching {
@@ -28,17 +35,36 @@ class GithubServiceRepoImpl(private val apiService: GithubApiService) : GithubSe
     * */
     override suspend fun searchUsers(value: String): Flow<List<User>> =
         withContext(Dispatchers.IO) {
+            val userDao = githubRepoDatabase.usersDao()
+
+            //CHECK if there's a match in the local database
+            val cachedUsers = userDao.getAllUsers().filter {
+                val searchQuery = value.trim().lowercase()
+
+                it.login.lowercase().contains(searchQuery) || it.name?.lowercase()
+                    ?.contains(searchQuery) == true
+            }
+
             flow {
-                val matchedUsers = apiService.searchUser(value).items
-                emit(matchedUsers)
+                if (cachedUsers.isNotEmpty()) {
+                    emit(cachedUsers.map { it.toUser() })
+                } else {
+                    val matchedUsers = apiService.searchUser(value).items
+                    emit(matchedUsers)
 
-                val matchedUsersProfile =
-                    withContext(Dispatchers.IO) {
-                        matchedUsers.map { user -> async { fetchUser(user.login!!) } }.awaitAll()
-                    }
+                    val matchedUsersProfile =
+                        withContext(Dispatchers.IO) {
+                            matchedUsers.map { user -> async { fetchUser(user.login!!) } }
+                                .awaitAll()
+                        }
 
-                emit(matchedUsersProfile)
+                    emit(matchedUsersProfile)
 
+                    userDao
+                        .insertUsers(matchedUsersProfile.map {
+                            it.toUserEntity()
+                        })
+                }
             }
         }
 
